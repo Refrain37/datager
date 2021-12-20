@@ -13,5 +13,6 @@ module.exports = {
     plugins: ['@typescript-eslint'],
     rules: {
         '@typescript-eslint/no-this-alias': ['off'],
+        '@typescript-eslint/no-explicit-any': ['off'],
     },
 };

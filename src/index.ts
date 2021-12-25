@@ -1,2 +1,1 @@
-const foo = 'eee';
-console.log(foo);
+export { default as Event } from './event';

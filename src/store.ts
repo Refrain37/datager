@@ -10,8 +10,12 @@ interface IDataOpts {
 }
 
 export enum storeEvent {
-  DATA_UPDATED,
-  DATA_DELETED,
+  DATA_UPDATED = 'data_updated',
+  DATA_DELETED = 'data_deleted',
+}
+
+export interface IDataUpdatetParams {
+  changed: object;
 }
 
 export class Store extends Event implements IDataOpts {
@@ -49,10 +53,12 @@ export class Store extends Event implements IDataOpts {
       if (!this.suspend) {
         [this.lastChanged, this.changed] = [this.changed, {}];
         // event dispatch
-        !lazy &&
-          this.fire(storeEvent.DATA_UPDATED, {
+        if (!lazy) {
+          const params: IDataUpdatetParams = {
             changed: this.lastChanged,
-          });
+          };
+          this.fire(storeEvent.DATA_UPDATED, params);
+        }
       }
     }
   }
